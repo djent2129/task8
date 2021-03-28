@@ -22,7 +22,7 @@ import javax.persistence.Table;
             query = "SELECT COUNT(e) FROM Employee AS e"
     ),
     @NamedQuery(
-            name = "checkRegisterCode",
+            name = "checkRegisteredCode",
             query = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :code"
             ),
     @NamedQuery(
@@ -44,8 +44,8 @@ public class Employee {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "passward", length = 64, nullable = false)
-    private String passward;
+    @Column(name = "password", length = 64, nullable = false)
+    private String password;
 
     @Column(name = "admin_flag", nullable = false)
     private Integer admin_flag;
@@ -59,7 +59,7 @@ public class Employee {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    private String password;
+
 
     public Integer getId() {
         return id;
