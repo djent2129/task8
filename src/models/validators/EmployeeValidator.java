@@ -20,12 +20,12 @@ public class EmployeeValidator {
             errors.add(code_error);
         }
 
-        String name_error = vaildateName(e.getName());
+        String name_error = validateName(e.getName());
         if(!name_error.equals("")) {
             errors.add(name_error);
         }
 
-        String password_error = vaildatePassword(e.getPassword(), passwordCheckFlag);
+        String password_error = validatePassword(e.getPassword(), passwordCheckFlag);
         if(!password_error.equals("")) {
     }
         return errors;
@@ -55,7 +55,7 @@ public class EmployeeValidator {
     }
 
     //社員名の必須入力チェック
-    private static String vaildateName(String name) {
+    private static String validateName(String name) {
         if(name == null || name.equals("")) {
             return "氏名を入力してください。";
         }
@@ -64,7 +64,7 @@ public class EmployeeValidator {
     }
 
     //パスワードを必須入力チェック
-    private static String vaildatePassword(String password, Boolean passwordCheckFlag) {
+    private static String validatePassword(String password, Boolean passwordCheckFlag) {
         //パスワードを変更する場合のみ実行
         if(passwordCheckFlag && (password == null || password.equals(""))) {
             return "パスワードを入力してください。";
