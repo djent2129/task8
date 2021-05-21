@@ -38,7 +38,6 @@
 						</tr>
 					</tbody>
 				</table>
-				<c:out value="${goods.size()}"></c:out>
 
 				<c:choose>
 				<c:when test ="${goods.size() != 1}" >
