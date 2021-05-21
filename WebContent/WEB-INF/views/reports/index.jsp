@@ -8,7 +8,15 @@
 	       <c:out value="${flush}"></c:out>
 	     </div>
 	    </c:if>
+	   <div id="header_main">
 	    <h2>日報 一覧</h2>
+	   </div>
+	  <form method="GET" action="<c:url value='/reports/index' />">
+	    <div id="search_menu">
+	        <input type = "text" name="results" value="">
+	        <button type = "submit">検索</button>
+          </div>
+       </form>
 	    <table id="report_list">
 	     <tbody>
 	       <tr>
@@ -25,6 +33,7 @@
 	           <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
 	         </tr>
 	        </c:forEach>
+
 	      </tbody>
 	    </table>
 
@@ -36,11 +45,12 @@
 	            <c:out value="${i}" />&nbsp;
 	           </c:when>
 	           <c:otherwise>
-	           	<a href="<c:url value='/reports/index?page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+	           	<a href="<c:url value='/reports/index?page=${i}&results=${results}' />"><c:out value="${i}" /></a>&nbsp;
 	           </c:otherwise>
 	          </c:choose>
 	          </c:forEach>
 	    </div>
 	    <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
+
 	  </c:param>
 </c:import>

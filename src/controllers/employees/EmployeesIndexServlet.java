@@ -21,21 +21,25 @@ import utils.DBUtil;
 public class EmployeesIndexServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
+
+
     /**
      * @see HttpServlet#HttpServlet()
      */
     public EmployeesIndexServlet() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
     /**
+     *
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em =DBUtil.createEntityManager();
 
         int page = 1;
+
         try{
             page = Integer.parseInt(request.getParameter("page"));
         } catch(NumberFormatException e) { }
@@ -47,11 +51,16 @@ public class EmployeesIndexServlet extends HttpServlet {
         long employees_count = (long)em.createNamedQuery("getEmployeesCount", Long.class)
                                 .getSingleResult();
 
+
+
+
         em.close();
 
         request.setAttribute("employees", employees);
         request.setAttribute("employees_count", employees_count);
         request.setAttribute("page", page);
+
+
         if(request.getSession().getAttribute("flush") != null) {
                 request.setAttribute("flush", request.getSession().getAttribute("flush"));
                 request.getSession().removeAttribute("flush");
@@ -61,5 +70,7 @@ public class EmployeesIndexServlet extends HttpServlet {
         rd.forward(request, response);
 
     }
+
+
 
 }

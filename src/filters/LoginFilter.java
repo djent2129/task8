@@ -18,14 +18,14 @@ import models.Employee;
 /**
  * Servlet Filter implementation class LoginFilter
  */
-@WebFilter("/LoginFilter")
+  @WebFilter("/*")
 public class LoginFilter implements Filter {
 
     /**
      * Default constructor.
      */
     public LoginFilter() {
-        // TODO Auto-generated constructor stub
+       // TODO Auto-generated constructor stub
     }
 
 	/**
