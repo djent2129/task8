@@ -67,6 +67,36 @@
 			</c:otherwise>
 		</c:choose>
 
+	<c:forEach var="comment" items="${comments}" varStatus="status">
+		<c:out value="${comment.report.employee.name}" /><br />
+		<c:out value="${comment.content}" /><br />
+		<fmt:formatDate value="${comment.created_at}" pattern="yyyy-MM-dd HH:mm:ss" />
+		 <p><a href="#" onclick="confirmDestroy();">削除</a></p>
+                <form method="POST" action="<c:url value='/comment/destroy' />">
+                    <input type="hidden" name="_token" value="${_token}" />
+                    <input type="hidden" name="comment" value="${comment.id}" />
+                </form><br /><br />
+                <script>
+                    function confirmDestroy() {
+                        if(confirm("本当に削除してよろしいですか？")) {
+                            document.forms[1].submit();
+                        }
+                    }
+                </script>
+	</c:forEach>
+
+		<form method="POST" action="<c:url value='/comment/create' />">
+		<label for="name">氏名</label><br />
+		<c:out value="${sessionScope.login_employee.name}" />
+		<br /><br />
+
+		<label for="content">コメント</label><br />
+		<textarea name="content" rows="10" cols="15"></textarea>
+		<input type="hidden" name="_token" value="${_token}" />
+		<input type="hidden" name="report" value="${report.id}" />
+		<button type="submit">投稿</button>
+		</form>
+
 		<p>
 			<a href="<c:url value="/reports/index" />">一覧に戻る</a>
 		</p>

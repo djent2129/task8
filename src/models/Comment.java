@@ -1,40 +1,30 @@
 package models;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-@Table(name = "goods")
+@Table(name = "comment")
 
-@NamedQueries({
-	@NamedQuery(
-			name = "getAllGoods",
-			query = "SELECT g FROM Goods AS g WHERE  g.employee = :login_employee ORDER BY g.id DESC"
-		  ),
-	@NamedQuery(
-			name = "getGoodsCount",
-			query = "SELECT COUNT(g) FROM Goods AS g WHERE g.employee = :login_employee"
-			),
-	@NamedQuery(
-			name = "getGoodsInformation",
-			query = "SELECT g FROM Goods AS g WHERE g.report = :id AND g.employee = :login_employee	 ORDER BY g.id DESC"
-			),
-	@NamedQuery(
-			name = "getGoodsInformationCount",
-			query = "SELECT COUNT(g) FROM Goods AS g WHERE g.report = :id AND g.employee = :login_employee"
-			)
+@NamedQuery(
+		name = "getComment",
+		query = "SELECT c FROM Comment AS c WHERE c.report = :id AND c.employee = :login_employee ORDER BY c.id DESC"
+		)
 
-	   })
+
+
 
 @Entity
-public class Goods {
+public class Comment {
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,6 +37,14 @@ public class Goods {
 	@ManyToOne
 	@JoinColumn(name = "report_id", nullable = false)
 	private Report report;
+
+	@Lob
+	@Column(name = "content", nullable = false)
+	private String content;
+
+	@Column(name = "created_at", nullable = false)
+	private Timestamp created_at;
+
 
 	public Integer getId() {
 		return id;
@@ -72,5 +70,20 @@ public class Goods {
 		this.report = report;
 	}
 
-
+	public String getContent() {
+		return content;
 	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
+
+}

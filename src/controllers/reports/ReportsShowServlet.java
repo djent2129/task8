@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import models.Comment;
 import models.Employee;
 import models.Goods;
 import models.Report;
@@ -55,9 +56,13 @@ public class ReportsShowServlet extends HttpServlet {
 	    		.setParameter("login_employee", login_employee)
 	    		.getSingleResult();
 
-
+	   List<Comment> comments = em.createNamedQuery("getComment", Comment.class)
+	    		.setParameter("id", r)
+	    		.setParameter("login_employee", login_employee)
+	    		.getResultList();
 
 	    em.close();
+	    request.setAttribute("comments", comments);
 	    request.setAttribute("goods", goods);
 	    request.setAttribute("goods_count", goods_count);
 
